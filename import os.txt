@@ -1,0 +1,126 @@
+import os
+
+# --- CONFIGURATION ---
+name = "Sreya"
+proposal_date = "March 17, 2016"
+meeting_year = "2011"
+current_year = "2026"
+
+html_content = f"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For {name}</title>
+    <style>
+        body {{
+            background: #fffafb;
+            font-family: 'Times New Roman', serif;
+            color: #333;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }}
+
+        .container {{
+            max-width: 600px;
+            background: white;
+            padding: 60px 40px;
+            margin: 50px auto;
+            border: 1px solid #f0e0d6;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }}
+
+        h1 {{ color: #8d6e63; font-weight: 300; letter-spacing: 4px; }}
+        .date-marker {{ color: #bcaaa4; font-size: 0.9em; margin-bottom: 30px; }}
+
+        .timeline {{
+            text-align: left;
+            margin: 40px 0;
+            border-left: 1px solid #d7ccc8;
+            padding-left: 20px;
+        }}
+
+        .event {{ margin-bottom: 30px; opacity: 0; transform: translateY(20px); transition: all 1s ease; }}
+        .event.show {{ opacity: 1; transform: translateY(0); }}
+        .event-yr {{ font-weight: bold; color: #a1887f; }}
+
+        /* Secret Message Styling */
+        #secretButton {{
+            background-color: #a1887f;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            cursor: pointer;
+            border-radius: 25px;
+            font-family: inherit;
+            transition: 0.3s;
+            margin-top: 20px;
+        }}
+
+        #secretButton:hover {{ background-color: #8d6e63; }}
+
+        #secretMessage {{
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background: #fdf8f5;
+            border-radius: 10px;
+            font-style: italic;
+            animation: fadeIn 2s;
+        }}
+
+        @keyframes fadeIn {{ from {{ opacity: 0; }} to {{ opacity: 1; }} }}
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>{name.upper()}</h1>
+        <div class="date-marker">MARCH 17, {current_year}</div>
+
+        <div class="timeline">
+            <div class="event" id="e1">
+                <span class="event-yr">{meeting_year}:</span> The beginning. The day our paths crossed.
+            </div>
+            <div class="event" id="e2">
+                <span class="event-yr">2016:</span> The proposal. The day I shared my heart with you.
+            </div>
+            <div class="event" id="e3">
+                <span class="event-yr">2026:</span> A decade later. My respect for you remains unchanged.
+            </div>
+        </div>
+
+        <button id="secretButton" onclick="revealMessage()">Click to reveal a message</button>
+        
+        <div id="secretMessage">
+            "Sreya, over the last 15 years, you have taught me the true meaning of patience and respect. 
+            Even as a one-sided love, having you in my life is a gift I don't take for granted. 
+            Thank you for being you."
+        </div>
+    </div>
+
+    <script>
+        // Trigger timeline animations on load
+        window.onload = () => {{
+            setTimeout(() => document.getElementById('e1').classList.add('show'), 500);
+            setTimeout(() => document.getElementById('e2').classList.add('show'), 1500);
+            setTimeout(() => document.getElementById('e3').classList.add('show'), 2500);
+        }};
+
+        function revealMessage() {{
+            document.getElementById('secretMessage').style.display = 'block';
+            document.getElementById('secretButton').style.display = 'none';
+        }}
+    </script>
+</body>
+</html>
+"""
+
+with open("Sreya_Interactive.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("Interactive HTML file created successfully!")
